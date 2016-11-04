@@ -1,0 +1,48 @@
+1. In Fig. 2-2 (pg 90), three process states are shown. In theory, with three states, there could be six transition, two out of each state. However, only four transitions are shown. Are there any circumstances in which either or both of the missing transitions might occur?
+ANS:
+The transition from ready to blocked is not possible but the transition from blocked to running is possible. In case of ready state to blocked state, the running state only enter in the blocked state. In case of the blocked to running transition it may happen because the CPU won’t go in idle state and the blocked may directly enter in running state. 
+ 
+3. On all current computers, at least part of the interrupt handlers are written in assembly language. Why? 
+ANS:
+The action on registers and stack pointers are performed by small assembly language routine and they are executed rapidly as possible. High level language doesn’t allow those access to the CPU hardware  that is required for them, so, at least part of the interrupt handlers is written in assembly language. 
+ 
+4. When an interrupt or a system call transfers control to the operating system, a kernel stack area separate from the stack of the interrupted process is generally used. Why?
+ANS:
+When an interrupt or a system call transfers control to the operating system, a kernel stack area separate from the stack of the interrupted process is generally used because those interrupted process may used the stack space and the OS may crash due to insufficient stack space.
+
+6. In the text, it was stated that the model of fig 2-11(a) was not suite to a file server using a cache in memory. Why not? Could each process have its own cache?
+ANS:
+Each process could have its own cache, however it is difficult but not impossible. If there is cache in the memory for each process, then it could be an ambiguity to manipulate such cache, one process can change the cache while another process may working in that cache so there will be extra burden work to check cache.
+ 
+7. If a multi-threaded process forks, a problem occurs if the child gets copies of all the parent¡¯s threads. Suppose that one of the original threads was waiting for keyboard input. Now two threads are waiting for keyboard input, one in each process. Does this problem ever occur in single-threaded processes?
+ANS:
+No, such kind of problem doesn’t occurs in the single threaded processes because single threaded process is blocked on the keyboard, single threaded process is not able to fork.
+
+8. In fig 2-8 (pg 98), a multi-threaded web server is shown. If the only way to read from a file is the normal blocking read system call, do you think user-level threads or kernel-level threads are being used for the web server? Why?
+ANS:
+As per the figure, a worker thread will block while it is reading those page from the disk. So if fine-grained threads are used it will block entire process destroying the value of multi-threading. So it must used the kernel level threads to permit some threads without affecting others.
+
+9. In the text, we described a multi-threaded web server, showing why it is better than a single-threaded server and a finite-state machine server. Are there any circumstances in which a single-threaded sever might be better? give an example.
+ANS:
+Yes, it would be better for single-threaded web server instead of multi-threaded web server if the server is entirely CPU bound. In this case multi-threaded adds unnecessary complexity.  
+ 
+10. In fig 2-12 (pg 102), the register set is listed as a per-thread rather than a per-process item, why? after all, the machine has only one set of registers.
+ANS:
+Each thread have its own contents, if the thread stopped is should save its contents each thread needs own register save area. So the register set is listed as a per-thread rather than a per-process.
+ 
+11. Why would a thread ever voluntarily give up the CPU by calling thread yield? After all, since there is no periodic clock interrupt, it may never get the CPU back.
+ANS:
+A thread would ever voluntarily give up the CPU by calling thread yield because the threads in a process cooperate, they are friendly to one another. Thread will yield if yielding is needed for the betterment of the application.
+ 
+14. What is the biggest advantage of implementing threads in user space? what is the biggest disadvantage?
+ANS:
+The advantage of implementing threads in user space is efficiency, the kernel are not required to switch threads. The disadvantage of implementing threads in user space is if one thread get blocked entire process will block.
+ 
+15. In fig 2-15 (pg 106) the thread creations and messages printed by the threads are interleaved at random. Is there a way to force the order to be strictly thread 1 created, thread 1 prints message, thread 1 exits, thread 2 created, thread 2 prints message, thread 2 exists, and so on? If so, how? If not, why not?
+ANS:
+Yes, we can able to implement strictly thread 1 created, thread 1 prints message, thread 1 exits, thread 2 created, thread 2 prints message, thread 2 exists, and so on. we can achieve this by following way, after each call to pthread_create, the main program could do a pthread_join to wait until the thread just created has exited before creating the next thread.
+
+21. In a system with threads, is there one stack per thread or one stack per process when user-level threads are used? What about when kernel-level threads are used? Explain.
+ANS:
+In a system with threads there should be one stack per thread because each thread have its own local storage for variables and return addresses and same case apply for all the user level threads as well as kernel level threads. 
+
