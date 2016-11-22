@@ -1,0 +1,76 @@
+23. Does the busy waiting solution using the turn variable (Fig. 2-23) work when the two processes
+are running on a shared-memory multiprocessor, that is, two CPUs sharing a common memory?
+ANS:
+Yes it works, however it still is busy waiting, of course.
+
+25. Give a sketch of how an operating system that can disable interrupts could implement
+semaphores.
+ANS:
+To implement semaphore operation, the operating system first disables interrupts and it reads the value of the semaphore.
+If it is working on a down and the semaphore is equal to zero, it inserts the calling process on to the list of blocked
+processes associated with the semaphore. If it is working an up, it must check to see if any processes are blocked on
+the semaphore. If one or more processes are blocked, one of them is removed from the list of blocked processes and made
+runnable. When all these operations have been finished, interrupts can be enabled again.
+ 
+27. If a system has only two processes, does it make sense to use a barrier to synchronize them? Why
+or why not?
+ANS:
+If the program works in phases and process can't enter to the next phase until both are finished with
+their current phase, It makes perfect sence of to use barrier.
+
+ 
+28. Can two threads in the same process synchronize using a kernel semaphore if the threads are
+implemented by the kernel? What if they are implemented in user space? Assume that no threads in
+any other processes have access to the semaphore. Discuss your answers.
+ANS:
+In the kernel-level threads, if a thread block on a semaphore, the kernel can run some other thread in the same process and
+there is no problem using semaphores. In the user-level threads, if a one thread blocks on a semaphore, the kernel thinks like 
+the entire process is blocked and does not run it ever again and the process fails.
+
+ 
+29. Synchronization within monitors uses condition variables and two special operations, WAIT and
+SIGNAL. A more general form of synchronization would be to have a single primitive, WAITUNTIL, that
+had an arbitrary Boolean predicate as parameter. Thus, one could say, for example,
+     WAITUNTIL x < 0 or y + z < n
+The SIGNAL primitive would no longer be needed. This scheme is clearly more general than that of
+Hoare or Brinch Hansen, but it is not used. Why not? (Hint: think about the implementation.)
+ANS:
+Because this is very expensive to implement. Each time any variable that appears in a predicate on which some 
+process is waiting for changes, the run-time system must re-evaluate the predicate to see if the process can be
+unblocked or not. With the Hoare and Brinch Hansen monitors, processes can be awakened on a signal primitive only.
+
+ 
+30. A fast food restaurant has four kinds of employees: (1) order takers, who take customer's orders;
+(2) cooks, who prepare the food; (3) packaging specialists, who stuff the food into bags; and (4) cashiers,
+who give the bags to customers and take their money. Each employee can be regarded as a communicating
+sequential process. What form of interprocess communication do they use? Relate this model to processes in MINIX 3.
+ANS:
+Communication between employees is by passing the messages: orders, foods, and bags. In UNIX terms, the four
+processes are connected by pipes.
+ 
+31. Suppose that we have a message-passing system using mailboxes. When sending to a full mailbox
+or trying to receive from an empty one, a process does not block. Instead, it gets an error code back. The
+process responds to the error code by just trying again, over and over, until it succeeds. Does this
+scheme lead to race conditions?
+ANS:
+It does not lead race conditions, however it is busy waiting condition.
+
+ 
+32. The CDC 6600 computers could handle up to 10 I/O processes simultaneously using an interesting
+form of round-robin scheduling called processor sharing. A process switch occurred after each
+instruction, so instruction 1 came from process 1, instruction 2 came from process 2, etc. The process
+switching was done by special hardware, and the overhead was zero. If a process needed T sec to
+complete in the absence of competition, how much time would it need if processor sharing was used
+with n processes?
+ANS:
+It will take nT sec.
+
+ 
+33. Can a measure of whether a process is likely to be CPU bound or I/O bound be determined by
+analyzing source code? How can this be determined at run time?
+ANS:
+The process can be identified as being I/O bound or CPU bound from checking the source code by determining the file
+read operations and whether they are done frequently or few times. During the execution of the code, the time spent
+on the CPU can be identified. Commands such as top can be used to determine the percentage of time the process is
+utilizing the processor.
+

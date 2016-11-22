@@ -1,0 +1,62 @@
+A. In your own words, please answer the following questions in brief (2-3 sentences):
+
+1) What is swapping?
+ANS:
+Swapping is a technique for memory management used by Operating system to enhance or increased the untilization of the processor by moving some of the blocked process from main memory to the secondary memory. Thus forming a queue of temporarily suspended process and the executions continues with the newly arrived process. Swapping is only necessary when that data is not already in the RAM.
+
+2) What is a page table?  What does it do?
+ANS:
+A page table is a data structure used by virtual memory managment system in a operating system to store the mapping between virtual addresses and the physical addresses. When a process requests a access to data in its memory, operating system maps the virtual address to physical address of the actual where that data is stored so operating system used page table to store the mappings of virtual address to physical address and in page table each mapping is known as page table entry.
+
+3) In your own words explain what virtual memory is.
+ANS:
+Virtual memory is a important component and it has vital role in operating system. Virtual memory allows us to run more applications on the system than we have enough physical memory to support. Virtual memory is simulated memory that is written to a file on the hard drive. That file is often called page file or swap file. It’s used by operating systems to simulate physical RAM by using hard disk space. Hence virtual memory is like a disk as an extension of RAM so that the effective size of usable memory grows correspondingly.
+ 
+4) What does the MMU do?
+ANS:
+Primarirly memory management unit (MMU) perform translation of virtual address to physical address. MMU usually integrated in central processing unit (CPU) however sometimes it is a separate integrated circuit. MMU effectively used in virtual memory managment handling same time memory protection, cache control etc. MMU use an in-memory table of itmes which is called page table and each of page table entry is called page table entry to map virtual page number to physical page number in main memory.
+
+5) What does the TLB (associative memory)  do?
+ANS:
+TLB (Translation Lookaside Buffer) is a cache memory, which is used to reduce the time taken to access the user memory. TLB (Translation Lookaside Buffer) is a part of MMU (Memory Management Unit) chip's. TLB (Transalation Lookaside Buffer) may reside between CPU and CPU cache. TLB (Transalation Lookaside Buffer) stores the recent translations of virtual memory address to physical memory address and process can be called when it is necessary the translation cache.
+ 
+6) What is the relationship of the TLB to the MMU?
+ANS:
+Memory Managment Unit (MMU) is a hardware unit which performs translation of virtual memory address to physical memory address whereas Translation Lookaside Buffer (TLB) is a cache of page table entries and it is used to avoid unnecessary acces to the main memory every time while mapping the virtual memory address to physical memory address.
+
+
+B. Answer following questions :  Page 248  -  1,   4,   6,   8,   11(a),   12,   16,   18.
+ 
+4) Consider a swapping system in which memory consists of the following hole sizes in memory order: 10 KB, 4 KB, 20 KB, 18 KB, 7 KB, 9 KB, 12 KB, and 15 KB. Which hole is taken for successive segment requests of
+(a) 12 KB
+(b) 10 KB
+(c) 9 KB
+for first fit? Now repeat the question for best fit, worst fit, and next fit.
+ANS:
+First fit takes 20 KB, 10 KB, 18 KB. Best fit takes 12 KB, 10 KB, and 9 KB. Worst fit takes 20 KB, 18 KB, and 15 KB. Next fit takes 20 KB, 18 KB, and 9KB.
+ 
+6) The Intel 8086 processor does not support virtual memory. Nevertheless, some companies previously sold systems that contained an unmodified 8086 CPU and do paging. Make an educated guess as to how they did it. (Hint: think about the logical location of the MMU.)
+ANS:
+They inserted a MMU in between the 8086 and the bus. The all 8086 physical address went into the MMU as virtual addresses and then MMU mapped into them as physical addresses which went to the bus.
+ 
+8) The amount of disk space that must be available for page storage is related to the maximum number of processes, n, the number of bytes in the virtual address space, v, and the number of bytes of RAM, r. Give an expression for the worst-case disk space requirements. How realistic is this amount?
+ANS:
+Total virtual address space = nv, spaces in RAM is r so the amount of disk storage space is nv-r. This is the storage far more than ever needed, in pracetice there is rarely n processes. 
+ 
+11.a) Suppose that a machine has 38-bit virtual addresses and 32-bit physical addresses. What is the main advantage of a multilevel page table over a single-level one?
+ANS:
+A multilevel page table decrease the number of actual pages of the page table which is need to be in memory due to its hierarchic structure. Program with lots of instruction and data we only need the top level page table i.e. one instruction page and one data page.
+ 
+12) A computer with 32 bit address uses a two-level page table. Virtual addresses are split into a 9-bit top-level page table field, an 11-bit second-level page table field, and an offset. How large are the pages and how many are there in the address space?
+ANS:
+20 bits are used for the virtual page numbers, leaving 12 bits over for the off-set. This yields a 4-KB page. 20 bits for the virtual page implies 2^20 pages.
+
+16) The TLB on the VAX does not contain an R bit, why?
+ANS:
+R bit is never used in the TLB. Just presence of a page there i.e. the page has been referenced; otherwise it would not be there. so R bit is completely redundant.
+
+18) A machine has 48-bit virtual addresses and 32-bit physical addresses. Pages are 8KB. How many entries are needed for the page table?
+ANS:
+With the 8-KB pages and a 48-bit virtual address space, the number of virtual pages is (2^48 /2^13) , which is 2^35 (about 34 billion).
+
+
