@@ -1,0 +1,91 @@
+Name: Krishan Karki
+Student ID: 984802
+
+A. In your own words, please answer the following questions as well:
+
+1) What is a character special file?
+ANS:
+Character special file is special type of file in operating system which related to input/output and used to model serial input/output devices such as terminals, printers and networks.
+
+2) What is a block special file?
+ANS:
+Block special file is a special file type of file in Operating system which is related to model disks.
+ 
+3) What is metadata?
+ANS:
+Metadata is the information about file like name, data, created date, modified date etc. It's also simply refer to file attributes.
+
+4)  What is a FAT?  What is kept there?
+ANS:
+FAT(File Allocation Table) is one of the technique of file architecture in operating system to implementing files  which is used to file allocation of table in main memory.
+
+5)  What is an i-node?  What is kept there?
+ANS:
+The method for keeping track of which blocks belong to which file is to associate with each file a data structure called an i-node (index-node), which lists the attributes and disk addresses of the file's blocks.
+
+B. Hand in the following from text book:
+
+1. In early UNIX systems, executable files (a. out files) began with a very specific magic number, not one chosen at random. These files began with a header, followed by the text and data segments. Why do you think a very specific number was chosen for executable files, whereas other file types had a more-or-less random magic number as the first word?
+ANS:
+In the early UNIX system loads the program directly in the main memory and start to executing at word 0 which was magic number. so to avoid execute the header as code, the magic number was used to branch instruction for a targeted addresses and it was possible to read the binary file directly into the new process address space and run it at 0, even it doesn't know about how big the header was.
+
+2. In Fig. 4-4, one of the attributes is the record length. Why does the operating system ever care about this?
+ANS:
+The operating system ever care about the record length attributes because when a file structured and used recorded key attributes to identify it and can be searched with that key attributes and the system has to know how big the record is.
+
+3. Is the open system call in UNIX absolutely essential? What would the consequences be of not having it?
+ANS:
+To achieve any operations in the system the file must be opened and system have to fetch the i-node for it, otherwise it could be crashed. There might be an issue arises is when to flush the i-node back to disk it would be could time out, or it might work.
+
+4. Systems that support sequential files always have an operation to rewind files. Do systems that support random access files need this too?
+ANS:
+No and if you we want read that file again it will just randomly access byte 0.
+
+5. Some operating systems provide a system call rename to give a file a new name. Is there any difference at all between using this call to rename a file and just copying the file to a new file with the new name, followed by deleting the old one?
+ANS:
+Yes it is different operation, first, if a disk is full the copy may fail, second, when renaming the file it doesn't change the creation time or the last modification time, however creating a new file cause the same time for creation and last modification.
+
+6. In some systems it is possible to map part of a file into memory. What restrictions must such systems impose? How is this partial mapping implemented?
+ANS:
+To achieve this, the mapped portion of the file must start at a page boundary and integral number of pages in length. Those mapped page uses files itself for backing store and unmapped memory uses a scratch file as backing store.
+
+7. A simple operating system only supports a single directory but allows that directory to have arbitrarily many files with arbitrarily long file names. Can something approximating a hierarchical file system be simulated? How?
+ANS:
+we can simulate using file names as /usr/ast/file or \usr\ast\file and it looks like a hierarchical path name, however in reality just a single file name containing embedded slashes character.
+
+8. In UNIX and Windows, random access is done by having a special system call that moves the "current position" pointer associated with a file to a given byte in the file. Propose an alternative way to do random access without having this system call.
+ANS:
+We can add extra parameter in the read system call that will determine what address to read from. The read operation has potential to doing seek within the file, this will cause use every time one extra parameter while calling the system read.
+
+13. Some digital consumer devices need to store data, for example as files. Name a modem device that requires file storage and for which contiguous allocation would be a fine idea.
+ANS:
+Digital camera records number of photographs in sequence on a nonvolatile media like flash memory, if we reset the camera the medium is empty and after that pictures are recorded one after another in sequence until the storage is full, if we add another storage media for more storage at this time for this application the contiguous file system is ideal.
+
+17. Two computer science students, Carolyn and Elinor, are having a discussion about i-nodes. Carolyn maintains that memories have gotten so large and so cheap that when a file is opened, it is simpler and faster just to fetch a new copy of the i-node into the i-node table, rather than search the entire table to see if it is already there. Elinor disagrees. Who is right?
+ANS:
+Elinor is correct because having two copies of the i-node in the table at the same time is wrong concept or disaster, In this case if both are updating simultaneously when the i-node are written back to this disk, whichever one gets written at last that will erase the previous one and the disk block will be lost.
+
+18. Name one advantage of hard links over symbolic links and one advantage of symbolic links over hard links.
+ANS:
+There is no any extra disk space for hard links, counter will keep the track of i-node how many there are. In Symbolic link there is a space for storage of file pointed to. Symbolic links can point to files on the machines even over the internet however hard links are restricted to pointing files in their own partitioned.
+
+21. What would happen if the bitmap or free list containing the information about free disk blocks was completely lost due to a crash? Is there any way to recover from this disaster, or is it bye-bye disk? Discuss your answers for UNIX and the FAT-16 file system separately.
+ANS:
+We can recover from that problem and it will take time to apply recovery algorithm to make a list of all blocks in the files and take the complement as the new free list. In UNIX it can be done by scanning all the i-node. In FAT-16 system this kind of problem doesn't occurs because there is no free list, if there were it can be recovered looking into the free entries.
+
+25. It has been suggested that the first part of each UNIX file be kept in the same disk block as its i-node. What good would this do?
+ANS:
+We know UNIX files are short, if the entire file fit in the same block as the i-node, only one disk access needed to read the file otherwise there should be two. It also gain for longer files since one fewer disk accesses needed.
+
+26. Consider Fig. 4-27. Is it possible that for some particular block number the counters in both lists have the value 2? How should this problem be corrected?
+ANS:
+I think it won't happen, sometime it would happen due to bug. If it happens the first step is to repairing the error remove both copies from the free list. Next a free block has to be acquired and copy the contents of the sick block there. And finally the occurrence of the block refer to the newly acquired copy of the block and system will be again consistent.
+
+28. Consider the idea behind Fig. 4-21, but now for a disk with a mean seek time of 8 msec, a rotational rate of 15,000 rpm, and 262,144 bytes per track. What are the data rates for block sizes of 1 KB, 2 KB, and 4 KB, respectively?
+ANS:
+At 15,000 rpm:
+Disk takes 4msec
+The average access time to read k bytes: 8+2+(k/262144)*4
+For 1KB: 10.015625 msec, rate: 102,240 KB/sec
+for 2KB: 10.03125 msec, rate: 204,162 KB/sec
+for 4KB: 10.0625 msec, rate: 407,056 KB/sec

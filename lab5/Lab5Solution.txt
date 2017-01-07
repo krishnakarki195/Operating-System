@@ -1,0 +1,70 @@
+Student ID: 984802
+Name: Krishna Karki
+ 
+A. In your own words, please answer the following questions in brief :
+ 
+1)  What is an interrupt?
+ANS:
+An interrupt is a signal from a device that attached to a computer or from a program within the computer that requires the operating system to stop and figure out what to do next, Iterrupt can be occurred when an I/O device has finished the work given to it, it causes an interrupt to the system.
+ 
+2)  What is the interrupt vector?
+ANS:
+The number on the address lines is used as an index into a table to fetch a new program counter called the interrupt vector. This program counter points to the start of the corresponding interrupt service procedure.
+
+
+B. Hand in the following from text book:
+Page  427 – 2,   3,   7,   8 (Figure is on page 21).
+Page  428 – 10,   11 (all),   13,   23.
+
+
+2) Given the speeds listed in Fig. 5-1, is it possible to scan documents from a scanner and transmit them over an 802.llg network at full speed? Defend your answer.
+ANS:
+Yes we can easily achieve this, the scanner puts out 400 KB/sec maximum and the wireless network runs at 6.75 MB/sec, so there is no problem at all.
+
+
+3) Figure 5-3(b) shows one way of having memory-mapped I/0 even in the presence of separate buses for memory and VO devices, namely, to first try the memory bus and if
+that fails try the VO bus. A clever computer science student has thought of an improvement on this idea: try both in parallel, to speed up the process of accessing VO
+devices. What do you think of this idea?
+ANS:
+As a computer science student, applying those idea is bad because if we are going to used the dedicated memory bus which is faster than the normal bus in an architecture. Lets take an example for having a trouble while using both normal bus and dedicated memory bus, if we use dedicated memory bus first time and next time we use the normal bus,the dedicated memory bus might be ideal so its bother for using both buses like one becomes busy and one becomes ideal so its a bad idea to use both. And its better to use only dedicated memory bus for memory related operations.
+
+7) In Fig. 5-9(b), the interrupt is not acknowledged until after the next character has been output to the printer. Could it have equally well been acknowledged right at the start of the interrupt service procedure? If so, give one reason for doing it at the end, as in the text. If not, why not?
+ANS:
+It could be done at the beggining or start time. For doing this at the end the the intterupt service is very short. By first outputting another character and then acknowledging the interrupt if another interrupt happens immediately the printer will be busy, so it will make print slightly fater. We can say that a disadvantage of this approach is slightly longer dead time when other interrupts may be disabled.
+
+8) A computer has a three-stage pipeline as shown in Fig. l-6(a). On each clock cycle,one new instruction is fetched from memory at the address pointed to by the PC and put into the pipeline and the PC advanced. Each instruction occupies exactly one memory word The instructions already in the pipeline are each advanced one stage.
+When an interrupt occurs, the current PC is pushed onto the stack, and the PC is set to the address of the interrupt handler. Then the pipeline is shifted right one stage and the first instruction of the interrupt handler is fetched into the pipeline. Does this machine have precise interrupts? Defend your answer.
+ANS:
+Yes, we can say that the interrupt is precise beacuae the stacked PC points to the first instruction not fetched and all instructions before that have been executed, the instruction pointed to and its successors have not been executed. Exactly thses steps are the precise interrupt. Precise interrupts are not hard to achieve on machine with a single pipeline. And we can see here the process is not for imprecise interrupt.
+
+
+10) Explain how an OS can facilitate installation of a new device without any need for recompiling the OS.
+ANS:
+In the UNIX system it can be done as following:
+There is a table indexed by device number, with each table entry being a C struct containing pointers to the functions for opening, closing, reading, and writing etc from the device. To install a new device, a new entry has to be made in this table and the pointers filled in, often to the newly loaded device driver.
+
+ 
+11) In which of the four l/0 software layers is each of the following done.
+(a) Computing the track, sector, and head for a disk read.
+ANS:
+Device driver
+
+(b) Writing commands to the device registers.
+ANS:
+Device driver
+
+(c) Checking to see if the user is permitted to use the device.
+ANS:
+Device-independent software
+
+(d) Converting binary integers to ASCII for printing.
+ANS:
+User-leve software
+
+13) Why are output files for the printer normally spooled on disk before being printed?
+ANS:
+If the printer is assigned as soon as the output appeared, a process could tie up the printer by printing a few characters and then going to sleep.
+
+23) A computer manufacturer decides to redesign the partition table of a Pentium hard disk to provide more than four partitions. What are some consequences of this change?
+ANS:
+I think one consequence is all esixting operating system will not work because all they look in the disk partition. Changing the format of the partition table will cause all the operating system to fail, so the only one way to change the partition table is to change simultaneously all the operating system too.
