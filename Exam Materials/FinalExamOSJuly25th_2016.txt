@@ -1,0 +1,43 @@
+1.	The ostrich algorithm provides an excellent mechanism to prevent deadlocks. explains , true or false.
+
+2.	Executable file is a ………. File. explain. 
+
+3.	Parallel and distributed computer systems can be divided into ______________ multiprocessors and _____________ multicomputers in terms of memory.
+
+4.	What is a “Name server” and how is it used in client-server model? 
+
+5.	What is redundancy and why is it used in a distributed system ?explain.
+
+6.	Match each of the following deadlock condition with its correct prevention approach. Explain how your choice prevents deadlock condition.
+
+I. Mutual Exclusion - 3	1.	Request all resources initially	
+II. Hold and wait - 1	2. Order resources numerically
+III. No Preemption - 4	3. Spool everything
+Iv. Circular wait - 2	4. Take resources away
+
+7.	A unix file system has 1 KB blocks and 4-byte disk address. What is the maximum file size if i-nodes contain 10 direct entries and one single, double and triple indirect entry each ?
+a.	16GB
+b.	4GB
+c.	40GB
+d.	1.6GB
+
+8.	When a procedure is transported from one machine and placed on another to be called by RPC, some problems can occur. In the text, we pointed out four of these: pointers, unknown array sizes, unknown parameter types, and global variables. 
+a.	Explain these in short.
+b.	An issue not discussed is what happens if the (remote) procedure executes a system call. What problem might that cause and what might be done to handle it ?
+
+9.	A system has four processes A,B, C and D and five resources R1, R2, R3, R4, R5. the states of the resources owned and requested are shown below. Draw the resource graph and show if system is deadlocked. Also suggest a way to recover from it.
+a.	Process A owns R2 and requests R1 and R3
+b.	Process B owns R1 and request R2 and R4
+c.	Process C owns nothing but requests R1 and R3
+d.	Process D requests R4
+
+10.	suppose that we have free segments with sizes: 6, 17, 25, 14 and 19. Place a program with size 13kb in the free segment using
+a.	First-fit
+b.	Best-fit
+c.	Worst fit
+
+11. Select your favorite topic covered in this course and relate with its corresponding SCI principle.
+12.  SCI related with cosmic conscisness.
+13. Draw Graph for a deadlock condition.........
+14. What are the things are include in modern OS system.
+ 

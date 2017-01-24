@@ -1,0 +1,113 @@
+Krishna Karki
+Student ID: 984802
+
+1) Try running the deadlock simulator using the following command:
+java deadlock a 2 2
+Explain why a deadlock does not occur.
+ANS:
+
+C:\moss\deadlock>java deadlock a 2 2
+time = 0 available = 2 blocked = 0
+time = 1 available = 2 blocked = 0
+time = 2 available = 2 blocked = 0
+time = 3 available = 2 blocked = 0
+time = 4 available = 2 blocked = 0
+time = 5 available = 2 blocked = 0
+time = 6 available = 2 blocked = 0
+time = 7 available = 2 blocked = 0
+time = 8 available = 2 blocked = 0
+time = 9 available = 2 blocked = 0
+time = 10 available = 0 blocked = 0
+time = 11 available = 0 blocked = 0
+time = 12 available = 0 blocked = 0
+time = 13 available = 0 blocked = 0
+time = 14 available = 0 blocked = 0
+time = 15 available = 0 blocked = 0
+time = 16 available = 0 blocked = 0
+time = 17 available = 0 blocked = 0
+time = 18 available = 0 blocked = 0
+time = 19 available = 0 blocked = 0
+time = 20 available = 2 blocked = 0
+time = 21 available =
+C:\moss\deadlock>
+
+There are two resource instance and two processes are running. At first they are computing for 10 milliseconds and each of process request a resource instance and compute for 10 milliseconds and free the resource instance and finally halt. Here the dealdlock is not occure because there are two resource instance and two process, each of the process request resource instance which is enough for the process.
+
+2) There are two additional process command files ("b0.dat" and "b1.dat") in the distribution. Run the deadlock simulator with this command:
+java deadlock b 2 1 1
+What happens?
+ANS:
+C:\moss\deadlock>java deadlock b 2 1 1
+time = 0 available = 1 1 blocked = 0
+time = 1 available = 1 1 blocked = 0
+time = 2 available = 1 1 blocked = 0
+time = 3 available = 1 1 blocked = 0
+time = 4 available = 1 1 blocked = 0
+time = 5 available = 1 1 blocked = 0
+time = 6 available = 1 1 blocked = 0
+time = 7 available = 1 1 blocked = 0
+time = 8 available = 1 1 blocked = 0
+time = 9 available = 1 1 blocked = 0
+time = 10 available = 0 0 blocked = 0
+time = 11 available = 0 0 blocked = 0
+time = 12 available = 0 0 blocked = 0
+time = 13 available = 0 0 blocked = 0
+time = 14 available = 0 0 blocked = 0
+time = 15 available = 0 0 blocked = 0
+time = 16 available = 0 0 blocked = 0
+time = 17 available = 0 0 blocked = 0
+time = 18 available = 0 0 blocked = 0
+time = 19 available = 0 0 blocked = 0
+time = 20 available = 0 0 blocked = 2
+
+Here there are one instance of resource 0 and one instance of resource 1 and both process first compute 10 milliseconds and and each of th process request the resource instance and compute for 10 milliseconds and without freeing the occupied resource they request again the resource instance and they enter in the deadlock.  
+
+Now try this.
+java deadlock b 2 1 2
+Why does the first command result in a deadlock but the second does not? Explain your answer in terms of what is going on in the process command files, b0.dat and b1.dat.
+ANS:
+
+C:\moss\deadlock>java deadlock b 2 1 2
+time = 0 available = 1 2 blocked = 0
+time = 1 available = 1 2 blocked = 0
+time = 2 available = 1 2 blocked = 0
+time = 3 available = 1 2 blocked = 0
+time = 4 available = 1 2 blocked = 0
+time = 5 available = 1 2 blocked = 0
+time = 6 available = 1 2 blocked = 0
+time = 7 available = 1 2 blocked = 0
+time = 8 available = 1 2 blocked = 0
+time = 9 available = 1 2 blocked = 0
+time = 10 available = 0 1 blocked = 0
+time = 11 available = 0 1 blocked = 0
+time = 12 available = 0 1 blocked = 0
+time = 13 available = 0 1 blocked = 0
+time = 14 available = 0 1 blocked = 0
+time = 15 available = 0 1 blocked = 0
+time = 16 available = 0 1 blocked = 0
+time = 17 available = 0 1 blocked = 0
+time = 18 available = 0 1 blocked = 0
+time = 19 available = 0 1 blocked = 0
+time = 20 available = 0 0 blocked = 1
+time = 21 available = 0 0 blocked = 1
+time = 22 available = 0 0 blocked = 1
+time = 23 available = 0 0 blocked = 1
+time = 24 available = 0 0 blocked = 1
+time = 25 available = 0 0 blocked = 1
+time = 26 available = 0 0 blocked = 1
+time = 27 available = 0 0 blocked = 1
+time = 28 available = 0 0 blocked = 1
+time = 29 available = 0 0 blocked = 1
+time = 30 available = 0 1 blocked = 0
+time = 31 available = 0 1 blocked = 0
+time = 32 available = 0 1 blocked = 0
+time = 33 available = 0 1 blocked = 0
+time = 34 available = 0 1 blocked = 0
+time = 35 available = 0 1 blocked = 0
+time = 36 available = 0 1 blocked = 0
+time = 37 available = 0 1 blocked = 0
+time = 38 available = 0 1 blocked = 0
+time = 39 available = 0 1 blocked = 0
+time = 40 available = 1 2 blocked = 0
+
+There are two processes, one instance of resource 0 and 2 instance of resource 1, first 10 milliseconds both processes compute and request resource instance, process one reuest instance of resource 0 and process two request instance of resource 1 and only one instance of resource 1 remaining and compute 10 milliseconds. After 10 milliseconds both processes request the instance of resource but only one instance available so one process is blocked and after 10 milliseconds the process release the instacne of resource 0 and the block process resume the running, So there is no condition for entering into the deadlock.

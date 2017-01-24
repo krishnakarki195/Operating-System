@@ -1,0 +1,51 @@
+Krishna Karki
+Student ID: 984802
+
+2. What happens if two CPUs in a multiprocessor attempt to access exactly the same word of memory at exactly the same instant?
+ANS:
+It depends on the how CPU conneted to the memory, one of them get first and siezes the bus, complete its operation and then other happens. I think we can't predict which CPU goes first, if the system is design for sequntial operations it doesn't matter.
+
+8. Are critical regions on code sections really necessary in an SMP operating system to avoid race conditions or will mutexes on data structures do the job as well?
+ANS:
+I think locks are enough for data structures and its very difficult to think a piece of code that comes under critical section and involve some kernel data structure. All the resourse acquisition and release uses data structure, and locks are very suitable for data structure as well as sufficient.
+
+13. Fig. 8-12 was said to depict a timesharing environment. Why is only one process (A) shown in part (b)?
+ANS:
+The process A is just selected and there may be others as well on the same CPU.
+
+20. How must the implementation of send and receive differ between a shared memory multiprocessor system and a multicomputer, and how does this affect performance?
+ANS:
+In a shared-memory multiprocessor it is sufficient to pass the pointer to the message from the CUP executing the send to the CPU executing the receive along with possible translations of virtual memory addresses to physical memory addresses. In a multicomputer system address of one computer has no meaning to another CPU, so the actual contents of the send buffer have to be sent as packets and then reassembled in the buffer in the receiving end. I think as a programmers view the process look identical but the longer time will take by multicomputer.
+
+
+22. When a procedure is scooped up from one machine and placed on another to be called by RPC, some problems can occur. In the text, we pointed out four of these: pointers, unknown array sizes, unknown parameter types, and global variables. An issue not discussed is what happens if the (remote) procedure executes a system call. What problems might that cause and what might be done to handle them?
+ANS:
+We know that the wrong thing happens if a system call is executed remotely, If the file is not preset on the remote then trying to read a file on the remote machine will not work. And also setting an alarm on the remote machine will not send a signal back to the calling machine. We can handle remote system calls is to trap them and send them back to the originating site for execution.
+
+25. Some multicomputers allow running processes to be migrated from one node to another. Is it sufficient to stop a process, freeze its memory image, and just ship that off to a different node? Name two nontrivial problems that have to be solved to make this work.
+ANS:
+When file is open kernel keeps the table for open files, if a process has open files, when it is unfrozen and tries to use one of its files,
+- First problem is the new kernel does not know about them.
+- Second problem is the signal mask, which is also stored on the original kernel.
+- Third problem is that if an alarm is pending, it will go off on the wrong machine.
+So, the kernel is full of bits and pieces of information about the process, and they have to be successfully migrated as well.
+
+26. Consider a type 1 hypervisor that can support up to n virtual machines at the same time. PCs can have a maximum of four disk primary partitions. Can n be larger than 4? If so, where can the data be stored?
+ANS:
+The hypervisor can take a single disk partition and divide into subpartitions and give each virtual machine one of them, so virtual machine have nothing to do with disk partitions just it take on partition. The subpartitions can be hundred of them, and it can either statically partition the disk into n pieces or do this on demand of requested.
+
+28. VMware does binary translation one basic block at a time, then it executes the block and starts translating the next one. Could it translate the entire program in advance and then execute it? If so, what are the advantages and disadvantages of each technique?
+ANS:
+VMware could translate the whole program in advance, the reason is not doing this there would be large piece of code that are never executed. The trnaslation is performed on demand because no unused code is ever translated. The disadvantages of on demand translation is that it might be less effective when starting and stoping the translator but as a whole the the effect is small.
+
+29. Does it make sense to paravirtualize an operating system if the source code is available? What if it is not?
+ANS:
+Yes, Linux has been paravirtualized precisely because the source code is available. Windows has not been paravirtualized because the source code is not available.
+
+32 Running multiple virtual machine on a PC is known to require large amounts of memory. Why? Can you think of any ways to reduce the memory usage? Explain.
+ANS:
+Running operating system is not only needs the memory for its all applications, it needs memory for hypervisor functiona and data structure to execute the important instructions on the operating system. The type 2 hypervisor have the added cost of the host operating system, and each virtual machine will have its own operating system so there will be N copies of operating system stored in the memory. I think one way of reducing memory usage is first identify the shared code and stored only one copy in the memory. There are lots of examples like web hosting company runs multiple VMs, each of them runs in identical version of LINUX operating system code and identical copy of Apache web server code, in this environment some of the code segment is shared along different VMs keeping the data regions in a private of ecah Vms.
+
+38. Can the URLs used in the Web exhibit location transparency? Explain your answer.
+ANS:
+Yes they can, For example, www.goodle.com indicates nothing about where the server is.
